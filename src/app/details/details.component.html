@@ -1,0 +1,71 @@
+<!-- <div class="container" *ngIf="country"> -->
+<div class="container" *ngFor="let country of country$ | async">
+  <button (click)="back()">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>Back
+  </button>
+  <div class="description">
+    <div class="flag">
+      <img src="{{ country.flags.svg }}"  alt="" />
+    </div>
+    <div class="informations">
+      <span class="informations-title">
+        {{ country.name.common }}
+      </span>
+      <div class="informations-details">
+        <div>
+          <div>
+            <span class="informations-details-items">Native Name:</span>
+            <span *ngIf="country.name.nativeName.eng; else common">{{ country.name.nativeName.eng.common }}</span>
+            <ng-template #common>{{ country.altSpellings[1] }}</ng-template>
+          </div>
+          <div>
+            <span class="informations-details-items">Population:</span>
+            <span>{{ country.population | number : "1.0-0" : "en-US"}}</span>
+          </div>
+          <div>
+            <span class="informations-details-items">Region:</span>
+            <span>{{ country.region }}</span>
+          </div>
+          <div>
+            <span class="informations-details-items">Sub Region:</span>
+            <span>{{ country.subregion }}</span>
+          </div>
+          <div>
+            <span class="informations-details-items">Capital:</span>
+            <span>{{ country.capital }}</span>
+          </div>
+        </div>
+        <div>
+          <div>
+            <span class="informations-details-items">Top Level Domain:</span>
+            <span>{{ country.tld }}</span>
+          </div>
+          <div>
+            <span class="informations-details-items">Currencies:</span>
+            <span *ngFor="let curr of country.currencies | keyvalue">{{
+              curr.value.name
+            }}</span>
+          </div>
+          <div>
+            <span class="informations-details-items">Languages:</span>
+            <span *ngFor="let lang of country.languages | keyvalue">
+              {{ lang.value }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="informations-borders">
+        <ng-container *ngIf="country.borders; else noBorder">
+          <span class="">{{country.borders.length>1 ?"Border Countries":"Border Country"}}:</span>
+          <span
+            (click)="goToCountry(border)"
+            *ngFor="let border of country.borders"
+            class="informations-borders-item"
+            >{{ border | cca3}}</span>
+        </ng-container>
+        <ng-template #noBorder>
+          <span class="">Border Countries:</span>none
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

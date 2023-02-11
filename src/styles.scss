@@ -1,0 +1,61 @@
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  background-color: var(--bgMain);
+}
+* {
+  box-sizing: border-box;
+}
+.light {
+  --textColorInput: hsl(0, 0%, 52%);
+  --bgHeader: hsl(0, 0%, 100%);
+  --textColor: hsl(200, 15%, 8%);
+  --bgMain: hsl(0, 0%, 98%);
+  --bgCard: hsl(0, 0%, 100%);
+  --shadow: hsla(200, 15%, 8%, 0.2);
+}
+
+.dark {
+  --textColorInput: hsl(0, 0%, 92%);
+  --bgHeader: hsl(209, 23%, 22%);
+  --textColor: hsl(0, 0%, 100%);
+  --bgMain: hsl(207, 26%, 17%);
+  --bgCard: hsl(209, 23%, 22%);
+  --shadow: hsla(200, 15%, 8%, 0.5);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 0.3rem;
+  font-family: "Nunito";
+  padding: 1rem;
+  background-color: var(--bgCard);
+  color: var(--textColor);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: background-color 0.4s, color 0.4s;
+}
+
+.container {
+  background-color: var(--bgMain);
+  color: var(--textColor);
+
+  transition: background-color 0.4s, color 0.4s;
+
+  padding: 5rem max(calc((100vw - 1280px) / 2), 2rem);
+  width: 100%;
+  height: 100vh;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

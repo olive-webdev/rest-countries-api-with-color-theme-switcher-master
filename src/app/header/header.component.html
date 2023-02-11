@@ -1,0 +1,16 @@
+<nav>
+  <a routerLink="/">Where in the world?</a>
+  <button (click)="toggleMode()">
+    <img
+      [src]="
+        mode === 'dark'
+          ? '../../assets/icons/sun.svg'
+          : '../../assets/icons/moon.svg'
+      "
+      alt="light or dark mode"
+      width="18"
+      height="18"
+    />
+    <span>{{ mode === "dark" ? "Light" : "Dark" }} Mode</span>
+  </button>
+</nav>

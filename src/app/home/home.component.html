@@ -1,0 +1,137 @@
+<div
+  class="container"
+  infinite-scroll
+  [scrollWindow]="false"
+  [infiniteScrollDistance]="1"
+  (scrolled)="scroll()"
+>
+  <div class="filterWrapper">
+    <div class="filterByCountry">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        class="feather feather-search"
+      >
+        <circle cx="11" cy="11" r="8"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input
+        #field
+        type="text"
+        [(ngModel)]="countrySearchField"
+        name="countrySearchField"
+        (input)="searchCountry(countrySearchField)"
+        placeholder="Search for a country..."
+      />
+      <button *ngIf="countrySearchField" (click)="deleteField()">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="15" y1="9" x2="9" y2="15"></line>
+          <line x1="9" y1="9" x2="15" y2="15"></line>
+        </svg>
+      </button>
+    </div>
+
+    <div class="filterByRegion">
+      <button (click)="toggleSelect()">
+        {{ regions ? regions + " Region" : "Filter by Region" }}
+        <svg
+          *ngIf="regions"
+          (click)="resetFilter()"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="15" y1="9" x2="9" y2="15"></line>
+          <line x1="9" y1="9" x2="15" y2="15"></line>
+        </svg>
+        <svg
+          *ngIf="!toggle && !regions"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+        <svg
+          *ngIf="toggle && !regions"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+      </button>
+      <ul *ngIf="toggle">
+        <li *ngFor="let item of items" (click)="filterByRegion(item)">{{item}}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="countriesList" *ngIf="countriesToDisplay; else loader">
+    <a
+      [routerLink]="'/' + country.name.common"
+      *ngFor="let country of countriesToDisplay"
+      class="card"
+    >
+      <div class="card-flag">
+        <img ngSrc="{{ country.flags.svg }}" alt="" fill />
+      </div>
+      <div class="card-info">
+        <div class="card-info-name">
+          {{ country.name.common }}
+        </div>
+        <div>
+          <span class="card-info-details">Population:</span>
+          {{ country.population | number : "1.0-0" : "en-US" }}
+        </div>
+        <div>
+          <span class="card-info-details">Region:</span>
+          {{ country.region }}
+        </div>
+        <div>
+          <span class="card-info-details">Capital:</span>
+          {{( country.capital | slice : 0 : 1 ) || "none"}}
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+<ng-template class="loader" #loader>
+  <div
+    class="loader"
+    style="margin-top: 10rem; display: grid; place-items: center"
+  >
+    Loader
+  </div></ng-template
+>
