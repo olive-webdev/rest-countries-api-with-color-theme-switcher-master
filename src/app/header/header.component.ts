@@ -9,7 +9,6 @@ import { UiService } from '../services/ui.service'
 export class HeaderComponent implements OnInit {
 
   mode!: string|null
-
   constructor(
     private ui: UiService,
     private render: Renderer2
