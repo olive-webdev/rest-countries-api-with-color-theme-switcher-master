@@ -19,8 +19,6 @@ export class CountriesService {
       return of(result as T)
     }
   }
-  // countries: Observable<Country[]> = this.http.get<any>('https://restcountries.com/v3.1/all')
-
 
   getCountries(): Observable<Country[]> {
     return this.http.get<Country[]>('https://restcountries.com/v3.1/all').pipe(

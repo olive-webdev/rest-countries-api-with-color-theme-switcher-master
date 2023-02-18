@@ -58,4 +58,262 @@ button {
   &::-webkit-scrollbar {
     display: none;
   }
+  & > button {
+    font-family: "Nunito", sans-serif;
+    font-size: 1rem;
+    background-color: var(--bgCard);
+    color: var(--textColor);
+    margin-block: 5rem;
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 2rem;
+    box-shadow: 0 0 5px 0 var(--shadow);
+    gap: 0.5rem;
+  }
+  & .description {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    @media (max-width: 1280px) {
+      grid-template-columns: 1fr;
+    }
+    column-gap: min(5vw, 5rem);
+    & .flag {
+      align-self: center;
+      background-color: #fff;
+      width: 100%;
+      max-width: 600px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      position: relative;
+      height: fit-content;
+      & img {
+        width: 100%;
+      }
+    }
+    & .informations {
+      padding: 2rem 0 2rem 0rem;
+      display: grid;
+      gap: 2rem;
+      &-title {
+        font-weight: 600;
+        font-size: 1.8rem;
+      }
+      &-details {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        @media (max-width: 1280px) {
+          grid-template-columns: 1fr;
+        }
+        gap: 1rem;
+        & > div {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+        &-items {
+          font-weight: 600;
+          margin-right: 0.3rem;
+        }
+      }
+      &-borders {
+        margin-top: -1rem;
+        @media (max-width: 1280px) {
+          margin-top: 0;
+        }
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        align-items: center;
+        &-item {
+          box-shadow: 0 0 5px 0 var(--shadow);
+          background-color: var(--bgCard);
+          color: var(--textColor);
+          cursor: pointer;
+          padding: 0.5rem 2rem;
+          border-radius: 0.3rem;
+          transition: background-color 0.4s, color 0.4s;
+        }
+      }
+    }
+  }
 }
+
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+    height: 80px;
+  padding: 0 max(calc((100vw - 1280px) / 2), 1rem);
+
+  background-color: var(--bgHeader);
+  color: var(--textColor);
+
+  box-shadow: 0px 0px 5px 0px hsla(0, 0%, 0%, 0.1);
+
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 1;
+
+  transition: background-color 0.4s, color 0.4s;
+  & a {
+    font-size: min(6vw, 1.4rem);
+    font-weight: 800;
+  }
+  
+  & button {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-right: -1rem;
+    & span {
+      @media (max-width :400px) {
+        display: none;
+      }
+    }
+  }
+}
+
+
+
+.countriesList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 4.5rem;
+}
+.card {
+  cursor: pointer;
+  border-radius: 0.3rem;
+  overflow: hidden;
+  box-shadow: 0 0 5px 0 var(--shadow);
+  transition: box-shadow 0.35s;
+  &:hover {
+    box-shadow: 0 0 10px 5px var(--shadow);
+  }
+  &-flag {
+    aspect-ratio: 5 / 3;
+    position: relative;
+    & img {
+      object-fit: cover;
+    }
+  }
+  &-info {
+    background-color: var(--bgCard);
+    color: var(--textColor);
+    transition: background-color 0.4s, color 0.4s;
+    padding: 1.5rem;
+    display: grid;
+    gap: 0.3rem;
+    &-name {
+      display: block;
+      white-space: nowrap;
+      width: 100%;
+      overflow: hidden;
+      font-weight: 800;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+    &-details {
+      font-weight: 800;
+    }
+  }
+}
+
+.filterWrapper {
+  padding-block: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+  & .filterByCountry {
+    flex-grow: 1;
+    max-width: 480px;
+    transition: all 1s;
+    position: relative;
+    color: var(--textColorInput);
+    & > svg {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+    }
+    & input {
+      border-radius: 0.3rem;
+      color: var(--textColor);
+      box-shadow: 0 0 5px 0 var(--shadow);
+      &::placeholder {
+        color: var(--textColorInput);
+      }
+      &:focus-visible {
+        outline: 1px solid var(--textColor);
+      }
+      width: 100%;
+      max-width: 480px;
+      font-family: "Nunito";
+      border: none;
+      font-size: 1.1rem;
+      background-color: var(--bgCard);
+      padding-left: 3.5rem;
+      padding-block: 1rem;
+      transition: background-color 0.4s, color 0.4s;
+    }
+    & input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active {
+      transition: background-color 5000s ease-in-out 0s;
+      -webkit-text-fill-color: var(--textColor) !important;
+    }
+    & > button {
+      color: var(--textColorInput);
+      background-color: transparent;
+      position: absolute;
+      display: block;
+      top: 0rem;
+      right: 1.5rem;
+      height: 24px;
+      width: 24px;
+    }
+  }
+  & .filterByRegion {
+    position: relative;
+    flex-grow: 0;
+    & button {
+      box-shadow: 0 0 5px 0 var(--shadow);
+      transition: all 1s;
+      font-size: 1.1rem;
+      &:focus-visible,
+      &:focus {
+        outline: 1px solid var(--textColor);
+      }
+      transition: background-color 0.4s, color 0.4s;
+    }
+
+    & ul {
+      box-shadow: 0 0 5px 0 var(--shadow);
+      position: absolute;
+      background-color: var(--bgCard);
+      color: var(--textColor);
+      list-style: none;
+      top: 4rem;
+      left: 0;
+      z-index: 2;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+      display: grid;
+      border-radius: 0.3rem;
+      & li {
+        cursor: pointer;
+        text-align: left;
+        padding: 1rem;
+        &:hover {
+          background: var(--bgMain);
+        }
+      }
+    }
+  }
+}
+
+
+

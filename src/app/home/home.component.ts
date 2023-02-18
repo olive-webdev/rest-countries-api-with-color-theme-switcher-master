@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Renderer2, AfterContentInit, HostListener } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { Country } from '../interfaces/country'
 import { CountriesService } from '../services/countries.service'
@@ -7,8 +7,7 @@ import { UiService } from '../services/ui.service'
 
 @Component({
   selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  templateUrl: './home.component.html'
 })
 export class HomeComponent implements OnInit {
 
