@@ -1,7 +1,6 @@
-<!-- <div class="container" *ngIf="country"> -->
 <div class="container" *ngFor="let country of country$ | async">
   <button (click)="back()">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>Back
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>Back
   </button>
   <div class="description">
     <div class="flag">
@@ -55,15 +54,15 @@
       </div>
       <div class="informations-borders">
         <ng-container *ngIf="country.borders; else noBorder">
-          <span class="">{{country.borders.length>1 ?"Border Countries":"Border Country"}}:</span>
-          <span
+          <span>{{country.borders.length>1 ?"Border Countries":"Border Country"}}:</span>
+          <button
             (click)="goToCountry(border)"
             *ngFor="let border of country.borders"
             class="informations-borders-item"
-            >{{ border | cca3}}</span>
+            >{{ border | cca3}}</button>
         </ng-container>
         <ng-template #noBorder>
-          <span class="">Border Countries:</span>none
+          <span>Border Countries:</span>none
         </ng-template>
       </div>
     </div>
