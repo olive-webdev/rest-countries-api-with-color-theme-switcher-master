@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, HostListener, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { Country } from '../interfaces/country'
 import { CountriesService } from '../services/countries.service'
@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   countriesToDisplay: Country[] = []
 
   start = 0
-  end = 24
+  end: number = this.ui.getNumberOfCards().numberOfCards
 
   toggle!: boolean
 
@@ -30,6 +30,11 @@ export class HomeComponent implements OnInit {
     private router: Router,
     private ui: UiService
   ) { }
+  @HostListener('window:resize')
+  resize() {
+    this.end = this.ui.getNumberOfCards().numberOfCards
+    this.scroll()
+  }
 
   ngOnInit(): void {
     this.countries.getCountries().subscribe((data) => {
@@ -37,7 +42,6 @@ export class HomeComponent implements OnInit {
       this.scroll()
     })
     this.toggle = false
-    this.ui.getWindowWidth()
   }
 
   scroll() {
@@ -48,7 +52,7 @@ export class HomeComponent implements OnInit {
       this.countriesToDisplay.push(...this.countriesList.slice(this.start, this.end))
     }
     this.start = this.end
-    this.end += 4
+    this.end += this.ui.getNumberOfCards().column
   }
 
   toggleSelect() {
@@ -58,7 +62,7 @@ export class HomeComponent implements OnInit {
   searchCountry(countrySearchField: string) {
     this.countriesToDisplay = []
     this.start = 0
-    this.end = 24
+    this.end = this.ui.getNumberOfCards().numberOfCards
     this.countriesFiltered = this.countriesList.filter(
       country => country.name.common.toLowerCase().includes(countrySearchField)
     )
@@ -78,7 +82,7 @@ export class HomeComponent implements OnInit {
     this.countriesToDisplay.length = 0
     this.countrySearchField = ""
     this.start = 0
-    this.end = 24
+    this.end = this.ui.getNumberOfCards().numberOfCards
     this.countriesFiltered = this.countriesList.filter(country => country.region === region)
     this.regions = region
     this.scroll()
@@ -87,7 +91,7 @@ export class HomeComponent implements OnInit {
   resetFilter() {
     this.countriesToDisplay = []
     this.start = 0
-    this.end = 20
+    this.end = this.ui.getNumberOfCards().numberOfCards
     this.regions = ""
     this.scroll()
     this.toggleSelect()

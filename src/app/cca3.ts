@@ -1,15 +1,15 @@
-import { Country } from "./interfaces/country"
-import { countries } from './countries'
+// import { Country } from "./interfaces/country"
+// import { countries } from './countries'
 
 
-function createCCA3(data: any[]) {
-    let cca3: { [key: string]: {} } = {}
-    data.map(country => {
-        cca3[country.cca3] = { eng: country.name.common }
+// function createCCA3(data: any[]) {
+//     let cca3: { [key: string]: {} } = {}
+//     data.map(country => {
+//         cca3[country.cca3] = { eng: country.name.common }
 
-        console.log(JSON.stringify(cca3))
-    })
-}
+//         console.log(JSON.stringify(cca3))
+//     })
+// }
 // createCCA3(countries)
 
 export const cca3: { [key: string]: { eng: string } } =

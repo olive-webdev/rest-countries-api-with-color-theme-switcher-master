@@ -10,8 +10,8 @@ import { Country } from '../interfaces/country'
 })
 export class CountriesService {
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
+
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(error)
@@ -22,16 +22,13 @@ export class CountriesService {
 
   getCountries(): Observable<Country[]> {
     return this.http.get<Country[]>('https://restcountries.com/v3.1/all').pipe(
-      tap(_ => console.log('get countries/all')),
       catchError(this.handleError<Country[]>('getCountries', []))
     )
   }
 
-
   getCountriesByName(name: string) {
     return this.http.get<any>('https://restcountries.com/v3.1/name/' + name + '?fullText=true')
       .pipe(
-        tap(_ => console.log('get country/' + name)),
         catchError(this.handleError<Country[]>('getCountry ' + name, []))
       )
   }
